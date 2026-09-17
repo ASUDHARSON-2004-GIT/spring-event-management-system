@@ -27,7 +27,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event createEvent(long organizerId, Long categoryId, long venueId, String eventName, String description,
+    public Event createEvent(long organizerId, long categoryId, long venueId, String eventName, String description,
                               LocalDate eventDate, LocalTime eventTime, int totalSeats, BigDecimal ticketPrice) {
 
         validateEventFields(eventName, eventDate, totalSeats, ticketPrice);

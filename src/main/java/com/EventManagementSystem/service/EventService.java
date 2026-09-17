@@ -9,7 +9,7 @@ import com.EventManagementSystem.model.Event;
 
 public interface EventService {
 
-    Event createEvent(long organizerId, Long categoryId, long venueId, String eventName, String description,
+    Event createEvent(long organizerId, long categoryId, long venueId, String eventName, String description,
                        LocalDate eventDate, LocalTime eventTime, int totalSeats, BigDecimal ticketPrice);
 
     Event getEventById(long eventId);
