@@ -1,7 +1,6 @@
 package com.EventManagementSystem.dto;
 
 import com.EventManagementSystem.model.Role;
-import com.EventManagementSystem.model.UserStatus;
 
 public class UserResponse {
 
@@ -10,7 +9,7 @@ public class UserResponse {
     private String email;
     private String phone;
     private Role role;
-    private UserStatus status;
+    private boolean status;
     private long eventCount;
 
     public long getId() {
@@ -53,11 +52,11 @@ public class UserResponse {
         this.role = role;
     }
 
-    public UserStatus getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(UserStatus status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

@@ -10,12 +10,10 @@ import com.EventManagementSystem.exception.UserNotFoundException;
 import com.EventManagementSystem.exception.ValidationException;
 import com.EventManagementSystem.model.Role;
 import com.EventManagementSystem.model.User;
-import com.EventManagementSystem.model.UserStatus;
 import com.EventManagementSystem.repository.UserRepository;
 import com.EventManagementSystem.service.AccountService;
 import com.EventManagementSystem.service.UserService;
 import com.EventManagementSystem.util.PasswordUtil;
-import com.EventManagementSystem.util.ValidationUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,7 +41,7 @@ public class UserServiceImpl implements UserService {
         user.setPhone(phone);
         user.setPasswordHash(hashedPassword);
         user.setRole(role);
-        user.setStatus(UserStatus.ACTIVE);
+        user.setStatus(true);
 
         User created = userRepository.save(user);
 
@@ -60,7 +58,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("No account found with this email"));
 
-        if (user.getStatus() == UserStatus.INACTIVE) {
+        if (user.getStatus()) {
             throw new ValidationException("This account has been deactivated, please contact admin");
         }
 
@@ -105,7 +103,7 @@ public class UserServiceImpl implements UserService {
     public void deactivateUser(long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id " + userId));
-        user.setStatus(UserStatus.INACTIVE);
+        user.setStatus(false);
         userRepository.save(user);
     }
 
@@ -113,7 +111,7 @@ public class UserServiceImpl implements UserService {
     public void activateUser(long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id " + userId));
-        user.setStatus(UserStatus.ACTIVE);
+        user.setStatus(true);
         userRepository.save(user);
     }
 

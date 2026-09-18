@@ -8,14 +8,7 @@ import java.util.Map;
 import com.EventManagementSystem.dto.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.EventManagementSystem.dto.CategoryRequest;
 import com.EventManagementSystem.dto.UserStatusRequest;
@@ -96,7 +89,7 @@ public class AdminController {
         return responseList;
     }
 
-    @PutMapping("/user/{userId}/status")
+    @PatchMapping("/user/{userId}/status")
     public ResponseEntity<String> updateUserStatus(@PathVariable long userId, @RequestBody UserStatusRequest request) {
         if (request.isActive()) {
             userService.activateUser(userId);
