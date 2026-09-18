@@ -45,7 +45,7 @@ public class OrganizerController {
 
     @PostMapping("/event")
     public ResponseEntity<Event> createEvent(@PathVariable long organizerId, @RequestBody EventRequest request) {
-
+        
         long venueId;
         if (request.getNewVenue() != null) {
             VenueRequest v = request.getNewVenue();

@@ -35,8 +35,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    @Column(name = "is_active", nullable = false)
+    private boolean is_active = true;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -54,8 +54,8 @@ public class User {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
-        if (this.status == null) {
-            this.status = UserStatus.ACTIVE;
+        if (!this.is_active) {
+            this.is_active = true;
         }
     }
 
@@ -112,12 +112,12 @@ public class User {
         this.role = role;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public boolean getStatus() {
+        return is_active;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setStatus(boolean status) {
+        this.is_active = status;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -147,6 +147,6 @@ public class User {
     @Override
     public String toString() {
         return "User id=" + id + ", name=" + name + ", email=" + email
-                + ", role=" + role + ", status=" + status;
+                + ", role=" + role + ", status=" + is_active;
     }
 }
